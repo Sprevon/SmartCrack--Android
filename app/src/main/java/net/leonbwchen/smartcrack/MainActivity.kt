@@ -8,17 +8,14 @@ import android.os.Looper
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.concurrent.thread
 
@@ -29,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.first_layout)
+        //登录系统
         val button1: Button = findViewById(R.id.button1)
         button1.setOnClickListener {
             getConnect()
@@ -39,8 +37,26 @@ class MainActivity : AppCompatActivity() {
                 inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
             }
         }
+
+        //读取缓存
+        val sharedPreference = getSharedPreferences("userPreference", MODE_PRIVATE)
+        val username = sharedPreference.getString("username", "")
+        val password = sharedPreference.getString("password", "")
+        val isSave = sharedPreference.getBoolean("is_save", false)
+
+        if (isSave){
+            val accountText: EditText = findViewById(R.id.edit_account)
+            val passwordText: EditText = findViewById(R.id.edit_password)
+            val check: CheckBox = findViewById(R.id.save_info)
+            accountText.setText(username)
+            passwordText.setText(password)
+            check.isChecked = true
+        }
     }
 
+    /**
+     * 获取网络验证
+     */
     private fun getConnect() {
         thread {
             try {
@@ -71,8 +87,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Json信息拆解
+     */
     private fun parseJSONWithJSONObject(jsonData: String) {
         try {
+            val account: EditText = findViewById(R.id.edit_account)
+            val password: EditText = findViewById(R.id.edit_password)
+            val check: CheckBox = findViewById(R.id.save_info)
             val jsonObject = JSONObject(jsonData)
             val message = jsonObject.getString("message")
             val code = jsonObject.getString("code")
@@ -84,6 +106,11 @@ class MainActivity : AppCompatActivity() {
             noticeToast(message)
             if (messageRes == "登录成功"){
                 Log.d("login", "success!!!")
+                if (check.isChecked){
+                    saveInfo(account.text.toString(), password.text.toString())
+                } else{
+                    deleteInfo()
+                }
                 turnNext()
             }
         } catch (e: Exception) {
@@ -91,6 +118,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 存储信息
+     */
+    private fun saveInfo(username: String, password:String){
+        val sharePreference = getSharedPreferences("userPreference", MODE_PRIVATE)
+        val editor = sharePreference.edit()
+        editor.putString("username", username)
+        editor.putString("password", password)
+        editor.putBoolean("is_save", true)
+        editor.apply()
+    }
+
+    /**
+     * 删除信息
+     */
+    private fun deleteInfo(){
+        try {
+            val sharedPreferences = getSharedPreferences("userPreference", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+    }
+    /**
+     * 信息提示
+     */
     private fun noticeToast(message: String){
         val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post{
@@ -98,6 +153,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 进入主页
+     */
     private fun turnNext(){
         val intent = Intent(this, SecondActivity::class.java)
         startActivity(intent)
