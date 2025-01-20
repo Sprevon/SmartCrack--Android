@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SmartCrack</string>
+    <string name="title_activity_my">MyActivity</string>
+    <string name="login_button">登录</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="button_2">Button 2</string>
+    <string name="login_title">员工登录</string>
+    <string name="login_account_hint">请输入账户</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="take_photo">Take Photo</string>
+</resources>

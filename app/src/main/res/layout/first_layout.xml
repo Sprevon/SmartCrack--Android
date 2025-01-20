@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        android:textSize="40sp"
+        android:padding="20sp"
+        android:layout_marginTop="100sp"
+        android:layout_marginBottom="40sp"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_account_hint"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:maxLines="1"
+        android:inputType="text"
+        android:layout_marginHorizontal="50sp"
+        android:id="@+id/edit_account"
+        android:text=""/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_password_hint"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:maxLines="1"
+        android:inputType="numberPassword"
+        android:layout_marginHorizontal="50sp"
+        android:layout_marginVertical="20sp"
+        android:id="@+id/edit_password"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginHorizontal="100sp"
+        android:layout_marginTop="15sp"
+        android:text="@string/login_button" />
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/message_1"/>-->
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/code_1"/>-->
+
+</LinearLayout>
