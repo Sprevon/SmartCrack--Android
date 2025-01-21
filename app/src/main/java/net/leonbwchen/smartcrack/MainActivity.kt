@@ -29,13 +29,18 @@ class MainActivity : AppCompatActivity() {
         //登录系统
         val button1: Button = findViewById(R.id.button1)
         button1.setOnClickListener {
-            getConnect()
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            val currentFocus = currentFocus
-            if (currentFocus != null) {
-                // 关闭软键盘
-                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
-            }
+
+            //TODO:测试阶段暂时跳过登录
+            turnNext()
+            return@setOnClickListener
+
+//            getConnect()
+//            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//            val currentFocus = currentFocus
+//            if (currentFocus != null) {
+//                // 关闭软键盘
+//                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+//            }
         }
 
         //读取缓存

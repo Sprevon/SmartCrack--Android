@@ -4,23 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:background="@color/purple_200"
+        android:layout_height="700dp" />
 
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/true_1"/>
-
+<!--    <ImageButton-->
+<!--        android:id="@+id/takePhoto"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:layout_weight="1"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/ic_camera" />-->
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:id="@+id/takePhoto"
-        android:text="@string/take_photo"/>
-    
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imagePhoto"
-        android:layout_gravity="center_horizontal"/>
+        android:text="@string/take_photo"
+        android:textSize="30sp"/>
+
 </LinearLayout>
